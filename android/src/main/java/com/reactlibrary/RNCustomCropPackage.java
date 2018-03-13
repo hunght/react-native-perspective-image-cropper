@@ -16,7 +16,6 @@ public class RNCustomCropPackage implements ReactPackage {
       return Arrays.<NativeModule>asList(new RNCustomCropModule(reactContext));
     }
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
       return Collections.emptyList();
     }

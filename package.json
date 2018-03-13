@@ -18,7 +18,7 @@
   "author": "Michaël Villeneuve",
   "license": "MIT",
   "peerDependencies": {
-    "react": "16.0.0-alpha.6",
-    "react-native": "0.44.3"
+    "react": "^16.3.0-alpha.1",
+    "react-native": "0.54.0"
   }
 }
