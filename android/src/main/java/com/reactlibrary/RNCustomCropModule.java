@@ -38,7 +38,7 @@ public class RNCustomCropModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void crop(final ReadableMap points, final String base64Image, final Callback successCallBack) {
         try {
-            Toast.makeText(reactContext, "should crop now", Toast.LENGTH_LONG).show();
+            
             Thread thread = new Thread(new Runnable(){
                 @Override
                 public void run(){
@@ -63,7 +63,7 @@ public class RNCustomCropModule extends ReactContextBaseJavaModule {
 
         //target size
         int bitmapWidth = srcBitmap.getWidth();
-        int bitmapHeight = (int)(srcBitmap.getWidth()/1.586);
+        int bitmapHeight = srcBitmap.getWidth();
 
         Bitmap bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -75,14 +75,17 @@ public class RNCustomCropModule extends ReactContextBaseJavaModule {
                 (float) points.getMap("bottomLeft").getDouble("x"), (float) points.getMap("bottomLeft").getDouble("y")
         };
         float[] dsc = new float[]{
-                0, 0,
-                bitmapWidth, 0,
-                bitmapWidth, bitmapHeight,
-                0, bitmapHeight
+                0, 
+                0,
+                bitmapWidth, 
+                0,
+                bitmapWidth, 
+                bitmapHeight,
+                0, 
+                bitmapHeight
         };
-
         Matrix matrix = new Matrix();
-        matrix.setPolyToPoly(src, 0, dsc, 0, 4);
+        matrix.setPolyToPoly(src, 0, dsc, 0, src.length >> 1);
         canvas.drawBitmap(srcBitmap, matrix, new Paint(Paint.ANTI_ALIAS_FLAG));
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
